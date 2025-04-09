@@ -99,18 +99,15 @@
             border-radius: 10px;
         }
         .welcome-container {
-            position: absolute;
-            top: 20%;
-            left: 5%;
             background: rgba(0, 0, 0, 0.7);
-            padding: 40px;
+            padding: 80px;
             border-radius: 15px;
-            text-align: center;
             color: #fff;
-            width: 80%;
-            max-width: 400px;
-            z-index: 1;
+            width: 400px;
+            text-align: left;
+            margin: 80px 0 200px 10%;
         }
+
         .welcome-container h1 {
             font-size: 36px;
             margin-bottom: 20px;
@@ -121,7 +118,7 @@
             border: none;
             padding: 15px 30px;
             font-size: 18px;
-            border-radius: 5px;
+            border-radius: 100px;
             cursor: pointer;
             text-transform: uppercase;
             margin-top: 20px;
@@ -161,18 +158,16 @@
             font-size: 18px;
         }
 
-        /* Adjusted margin for the next sections */
         .properties {
-            margin-top: 100px; /* Move the properties section down */
+            margin-top: 100px; 
         }
         .about {
-            margin-top: 50px; /* Add a slight margin to separate About Us */
+            margin-top: 50px; 
         }
         .service-section, .contact {
-            margin-top: 80px; /* Move services and contact slightly down */
+            margin-top: 80px; 
         }
 
-        /* Testimonial Section */
         .testimonial-section {
             background: rgba(0, 0, 0, 0.8);
             padding: 40px 10%;
@@ -197,7 +192,95 @@
         .testimonial-container .testimonial-author {
             font-weight: bold;
             font-size: 20px;
-            margin-top: 15px;
+            margin-top: 15px2
+        }
+
+        .landlord-img {
+            width: 250px; 
+            height: 250px;  
+            border-radius: 50%; 
+            object-fit: cover;  
+        }
+
+        .contact-section {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-top: 50px;
+        }
+
+        .contact-container {
+            display: flex;
+            justify-content: space-between;
+            gap: 30px;
+            flex: 2;
+        }
+
+        .landlord-info-container {
+            flex: 1;
+        }
+
+        .contact-form-container {
+            flex: 1;
+        }
+
+        .landlord-info-container .landlord-info {
+            display: flex;
+            gap: 20px;
+        }
+        .landlord-description-container {
+            background: rgba(204, 204, 204, 0.8);
+             padding: 20px;
+            border-radius: 10px;
+            box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.3);
+        }
+
+
+        .landlord-info-container .small-container {
+            background: rgba(204, 204, 204, 0.8);
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        .contact-form-container {
+            background: rgba(204, 204, 204, 0.8);
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        .contact-form .form-group {
+            margin-bottom: 15px;
+        }
+
+        .contact-form label {
+            font-size: 16px;
+            color: #333;
+        }
+
+        .contact-form input,
+        .contact-form textarea {
+            width: 100%;
+            padding: 10px;
+            margin-top: 5px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+
+        .send-message-btn {
+            background-color: #df31a5;
+            color: #fff;
+            padding: 10px 20px;
+            border-radius: 50px;
+            cursor: pointer;
+            font-size: 18px;
+            text-transform: uppercase;
+            border: none;
+        }
+
+        .send-message-btn:hover {
+            background-color: #b7268f;
         }
     </style>
 </head>
@@ -227,7 +310,6 @@
         <button class="rent-now-btn">Rent Now</button>
     </div>
 
-    <!-- Properties Section -->
     <section id="properties" class="properties">
         <div class="section-title">Featured Properties</div>
         <div class="section-content">Browse some of our amazing rental properties below.</div>
@@ -250,7 +332,6 @@
         </div>
     </section>
 
-    <!-- About Us Section -->
     <section id="about" class="about">
         <div class="about-container">
             <h2>About Us</h2>
@@ -258,7 +339,6 @@
         </div>
     </section>
 
-    <!-- Services Section -->
     <section id="service" class="service">
         <div class="section-title">Our Services</div>
         <div class="service-section">
@@ -277,7 +357,6 @@
         </div>
     </section>
 
-    <!-- Testimonial Section -->
     <section class="testimonial-section">
         <div class="testimonial-container">
             <p>"Finding the perfect apartment has never been easier! The process was smooth, and the team was incredibly helpful in guiding me every step of the way. My new home is exactly what I was looking for—comfortable, affordable, and in a great location. I highly recommend their service to anyone looking for a hassle-free rental experience!"</p>
@@ -285,11 +364,43 @@
         </div>
     </section>
 
-    <!-- Contact Us Section -->
     <section id="contact" class="contact">
         <div class="section-title">Contact Us</div>
-        <div class="section-content">
-            Have questions? Feel free to reach out to us at <strong>support@rentmaster.com</strong> or call us at <strong>(123) 456-7890</strong>.
+        <div class="contact-section">
+            <div class="contact-container">
+                <div class="landlord-info-container">
+                    <div class="landlord-info">
+                        <img src="image7.png" alt="Landlord" class="landlord-img">
+                        <div class="landlord-details">
+                            <p>Hi, I’m Jerico Sins, 26, a hardworking and versatile individual. I take pride in being a supportive partner and giving my best in everything I do.</p>
+                        </div>
+                    </div>
+                    <div class="landlord-contact-details small-container">
+                        <div>Phone: (123) 456-7890</div>
+                        <div>Email: jerico.sins@example.com</div>
+                        <div>FB Name: JericoSinsFB</div>
+                    </div>
+                </div>
+
+                <div class="contact-form-container">
+                    <div class="section-title">Get in Touch</div>
+                    <form class="contact-form">
+                        <div class="form-group">
+                            <label for="name">Name:</label>
+                            <input type="text" id="name" name="name" required placeholder="Enter your name">
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email:</label>
+                            <input type="email" id="email" name="email" required placeholder="Enter your email">
+                        </div>
+                        <div class="form-group">
+                            <label for="comment">Comment:</label>
+                            <textarea id="comment" name="comment" rows="4" placeholder="Enter your message"></textarea>
+                        </div>
+                        <button type="submit" class="send-message-btn">Send Message</button>
+                    </form>
+                </div>
+            </div>
         </div>
     </section>
 </body>
