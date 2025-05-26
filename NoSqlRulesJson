@@ -1,0 +1,8 @@
+{
+  "rules": {
+    "people": {
+      ".read": true,
+      ".write": true
+    }
+  }
+}
