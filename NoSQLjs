@@ -1,0 +1,151 @@
+// Firebase configuration
+const firebaseConfig = {
+    apiKey: "AIzaSyAnzir6MN5yfnMHTYXhgCYU7aBNNdjPEwQ",
+    authDomain: "echo-26113.firebaseapp.com",
+    databaseURL: "https://echo-26113-default-rtdb.firebaseio.com",
+    projectId: "echo-26113",
+    storageBucket: "echo-26113.firebasestorage.app",
+    messagingSenderId: "851354934403",
+    appId: "1:851354934403:web:0003a43ad238d00cb18fb6",
+    measurementId: "G-47KWWB7Z79"
+};
+
+// Initialize Firebase
+firebase.initializeApp(firebaseConfig);
+const database = firebase.database();
+const peopleRef = database.ref('people');
+
+// DOM elements
+const personForm = document.getElementById('personForm');
+const nameInput = document.getElementById('name');
+const genderInput = document.getElementById('gender');
+const ageInput = document.getElementById('age');
+const emailInput = document.getElementById('email');
+const personIdInput = document.getElementById('personId');
+const saveBtn = document.getElementById('saveBtn');
+const clearBtn = document.getElementById('clearBtn');
+const peopleTableBody = document.getElementById('peopleTableBody');
+const statusMessage = document.getElementById('statusMessage');
+
+// Form submit handler
+personForm.addEventListener('submit', (e) => {
+    e.preventDefault();
+    
+    const id = personIdInput.value || Date.now().toString();
+    const person = {
+        name: nameInput.value,
+        gender: genderInput.value,
+        age: ageInput.value,
+        email: emailInput.value
+    };
+    
+    if (personIdInput.value) {
+        // Update existing person
+        peopleRef.child(id).update(person)
+            .then(() => {
+                showStatus('Person updated successfully!', 'success');
+                personForm.reset();
+                personIdInput.value = '';
+                saveBtn.innerHTML = '<i class="fas fa-save"></i> Save';
+            })
+            .catch((error) => {
+                showStatus('Error updating person: ' + error.message, 'error');
+            });
+    } else {
+        // Add new person
+        peopleRef.child(id).set(person)
+            .then(() => {
+                showStatus('Person added successfully!', 'success');
+                personForm.reset();
+            })
+            .catch((error) => {
+                showStatus('Error adding person: ' + error.message, 'error');
+            });
+    }
+});
+
+// Clear form handler
+clearBtn.addEventListener('click', () => {
+    personForm.reset();
+    personIdInput.value = '';
+    saveBtn.innerHTML = '<i class="fas fa-save"></i> Save';
+});
+
+// Load data from Firebase
+peopleRef.on('value', (snapshot) => {
+    peopleTableBody.innerHTML = '';
+    const people = snapshot.val();
+    
+    if (people) {
+        Object.keys(people).forEach((id) => {
+            const person = people[id];
+            const row = document.createElement('tr');
+            
+            row.innerHTML = `
+                <td>${person.name}</td>
+                <td>${person.gender}</td>
+                <td>${person.age}</td>
+                <td>${person.email}</td>
+                <td>
+                    <div class="action-buttons">
+                        <button class="action-btn edit-btn" data-id="${id}">
+                            <i class="fas fa-edit"></i>
+                        </button>
+                        <button class="action-btn delete-btn" data-id="${id}">
+                            <i class="fas fa-trash-alt"></i>
+                        </button>
+                    </div>
+                </td>
+            `;
+            
+            peopleTableBody.appendChild(row);
+        });
+        
+        // Add event listeners to edit buttons
+        document.querySelectorAll('.edit-btn').forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                const id = e.currentTarget.getAttribute('data-id');
+                const person = people[id];
+                
+                personIdInput.value = id;
+                nameInput.value = person.name;
+                genderInput.value = person.gender;
+                ageInput.value = person.age;
+                emailInput.value = person.email;
+                
+                saveBtn.innerHTML = '<i class="fas fa-save"></i> Update';
+                nameInput.focus();
+            });
+        });
+        
+        // Add event listeners to delete buttons
+        document.querySelectorAll('.delete-btn').forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                if (confirm('Are you sure you want to delete this person?')) {
+                    const id = e.currentTarget.getAttribute('data-id');
+                    
+                    peopleRef.child(id).remove()
+                        .then(() => {
+                            showStatus('Person deleted successfully!', 'success');
+                        })
+                        .catch((error) => {
+                            showStatus('Error deleting person: ' + error.message, 'error');
+                        });
+                }
+            });
+        });
+    } else {
+        peopleTableBody.innerHTML = '<tr><td colspan="5" style="text-align: center;">No people found</td></tr>';
+    }
+});
+
+// Show status message
+function showStatus(message, type) {
+    statusMessage.textContent = message;
+    statusMessage.className = `status-message ${type}`;
+    statusMessage.style.display = 'block';
+    
+    setTimeout(() => {
+        statusMessage.style.display = 'none';
+    }, 3000);
+}
